@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+/* Login modal */
+.login-modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: aliceblue;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+.modal-cont{
+    background-color: #fefefe;
+    margin: 5px auto;
+    border: 1px solid #888;
+    width: 450px;
+    text-align: center;
+}
+.log-container{
+    margin: 0 auto;
+    width: 450px;
+    clear: both;
+    padding: 5px;
+    
+    
+}
+.log-container input{
+    width: 100%;
+    clear: both;
+}
+.log-container label{
+    margin: 8px;
+    float: left;
+}
+.logo-login{
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+.close{
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 450px) {
+    .modal-cont{
+        text-align: center;
+        width: 80%;
+    }
+    .log-container{
+        width: auto;
+    }
+}
