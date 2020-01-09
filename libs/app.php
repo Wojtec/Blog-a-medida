@@ -19,17 +19,13 @@ class app
 
             if (isset($url[1]))
             {
-                echo "CHw!";
                 $controller->{$url[1]}();
-            }
-            else
-            {
-                echo "CHA!";
             }
         }
         else
         {
-            $controller = new failure();
+            $errorMsg = "Could not find a controller named " . $controllerName;
+            $controller = new failure($errorMsg);
         }
 
     }
