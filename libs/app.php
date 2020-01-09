@@ -5,6 +5,11 @@ class app
 {
     function __construct()
     {
+        if (!isset($_GET["url"]))
+        {
+            $_GET["url"] = "main";
+        }
+
         $url = $_GET["url"];
         $url = rtrim($url, '/');
         $url = explode('/', $url);
