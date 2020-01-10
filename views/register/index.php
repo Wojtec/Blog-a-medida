@@ -8,6 +8,10 @@
     <title>Blog</title>
 </head>
 <body>
+    <?php require 'views/header.php'; ?>
+    
     <h1>register!</h1>
+    
+    <?php require 'views/footer.php'; ?>
 </body>
 </html>
