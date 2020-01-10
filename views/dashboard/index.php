@@ -10,8 +10,8 @@
 <body>
     <?php require 'views/header.php'; ?>
 
-    <h1>Error! <?php echo $this->errorMsg; ?></h1>
-    
+    <h1>dashboard!</h1>
+
     <?php require 'views/footer.php'; ?>
 </body>
 </html>

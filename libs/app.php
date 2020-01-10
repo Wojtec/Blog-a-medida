@@ -7,7 +7,7 @@ class app
     {
         if (!isset($_GET["url"]))
         {
-            $_GET["url"] = "main";
+            $_GET["url"] = "dashboard";
         }
 
         $url = $_GET["url"];

@@ -8,10 +8,6 @@
     <title>Blog</title>
 </head>
 <body>
-    <?php require 'views/header.php'; ?>
-
-    <h1>Error! <?php echo $this->errorMsg; ?></h1>
-    
-    <?php require 'views/footer.php'; ?>
+    <h1>login!</h1>
 </body>
 </html>

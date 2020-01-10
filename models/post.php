@@ -1,6 +1,6 @@
 <?php
 
-class newModel extends model
+class post extends model
 {
     public function __construct()
     {

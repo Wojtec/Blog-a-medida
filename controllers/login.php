@@ -1,11 +1,10 @@
 <?php
-class core extends controller
+class login extends controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->view->render('core/index');
-        echo "main";
+        $this->view->render('login/index');
     }
 
     function methodA()
