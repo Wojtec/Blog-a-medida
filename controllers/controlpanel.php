@@ -4,12 +4,11 @@ class controlpanel extends controller
     function __construct()
     {
         parent::__construct();
-        $this->view->render('controlpanel/index');
     }
 
-    function methodA()
+    function render()
     {
-        echo "A Procedure";
+        $this->view->render('controlpanel/index');
     }
 }
 ?>
