@@ -4,12 +4,11 @@ class register extends controller
     function __construct()
     {
         parent::__construct();
-        $this->view->render('register/index');
     }
 
-    function methodA()
+    function render()
     {
-        echo "A Procedure";
+        $this->view->render('register/index');
     }
 }
 ?>

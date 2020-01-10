@@ -4,12 +4,11 @@ class login extends controller
     function __construct()
     {
         parent::__construct();
-        $this->view->render('login/index');
     }
 
-    function methodA()
+    function render()
     {
-        echo "A Procedure";
+        $this->view->render('login/index');
     }
 }
 ?>

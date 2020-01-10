@@ -21,10 +21,15 @@ class app
         {
             require_once $controllerPath;
             $controller = new $controllerName;
+            $controller->loadModel($controllerName);
 
             if (isset($url[1]))
             {
                 $controller->{ $url[1] }();
+            }
+            else
+            {
+                $controller->render();
             }
         }
         else
