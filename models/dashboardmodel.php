@@ -16,7 +16,8 @@ class dashboardModel extends model
     {
         $posts = [];
 
-        try{
+        try
+        {
             $query = $this->db->connect()->query('
             select * from posts
             inner join users on posts.user_id = users.user_id
@@ -37,7 +38,39 @@ class dashboardModel extends model
             }
             
             return $posts;
-        }catch(PDOException $e){
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return [];
+        }
+    }
+
+    public function getCommentsFromPostId($postId)
+    {
+        $comments = [];
+
+        try
+        {
+            $query = $this->db->connect()->query('
+            select * from comments
+            where post_id = ' . $postId . ';
+            ');
+
+            while($row = $query->fetch()){
+                $comment = new comment();
+                $comment->comment_id = $row['comment_id'];
+                $comment->user_id    = $row['user_id'];
+                $comment->post_id  = $row['post_id'];
+                $comment->comment_text  = $row['comment_text'];
+                $comment->comment_date  = $row['comment_date'];
+                array_push($comments, $comment);
+            }
+            
+            return $comments;
+        }
+        catch(PDOException $e)
+        {
             echo "sql error " . $e.getMessage();
             return [];
         }
