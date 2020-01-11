@@ -37,6 +37,7 @@ class dashboardModel extends model
         //         array_push($posts, $post);
         //     }
             
+<<<<<<< HEAD
         //     return $posts;
         // }
         // catch(PDOException $e)
@@ -44,6 +45,58 @@ class dashboardModel extends model
         //     echo "sql error " . $e.getMessage();
         //     return [];
         // }
+=======
+            foreach ($posts as $post)
+            {
+                $post->comments = $this->getCommentsFromPostId($post->post_id);
+                $post->user = $this->getUserByUserId($post->user_id);
+
+                foreach ($post->comments as $comment)
+                {
+                    if ($comment->user_id != null)
+                    {
+                        $comment->user = $this->getUserByUserId($comment->user_id);
+                    }
+                }
+            }
+
+            var_dump($posts);
+
+            return $posts;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return [];
+        }
+>>>>>>> e9d75b6b32f0c525903e8f8fae50c0fe2f8e7a50
+    }
+
+    public function getUserByUserId($userId)
+    {
+        try
+        {
+            $query = $this->db->connect()->query('
+            select * from users
+            where user_id = ' . $userId . ';
+            ');
+
+            $row = $query->fetch();
+
+            $user = new user();
+            $user->user_id = $row['user_id'];
+            $user->user_name    = $row['user_name'];
+            $user->email  = $row['email'];
+            $user->pass  = $row['pass'];
+            
+            
+            return $user;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return [];
+        }
     }
 
     public function getCommentsFromPostId($postId)
