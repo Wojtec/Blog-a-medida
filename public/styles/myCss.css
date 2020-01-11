@@ -9,6 +9,12 @@ h4{
 hr{
         color: rgba(0,0,0,0.5);
 }
+a{
+    text-decoration: none;
+    width: 15%;
+    height: 60px;
+
+}
 html, body {
     height: 100%;
     margin: 0;
@@ -33,9 +39,9 @@ html, body {
     font-size: 20px;
     padding: 20px;
     color: black;
-    width: 100%;
+    width: 15%;
     height: 60px;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0);
+    
 
 }
 .login:hover{
@@ -56,7 +62,7 @@ html, body {
 }
 /* Login & Register modal */
 .login-modal{
-    display: none;
+    display: block;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -236,9 +242,18 @@ html, body {
 
 
 
+/*************************** FOOTER ***********************/
 
-
-
+.footer{
+    position: fixed;
+    min-height: 60px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+    border-top: solid 1px rgba(0, 0, 0, 0.5);
+}
 
 
 

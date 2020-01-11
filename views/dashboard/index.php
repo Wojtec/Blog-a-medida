@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/reset.css">
+
     <title>Blog</title>
 </head>
 <body>
     <?php require 'views/header.php'; ?>
-
+    <!-- left-navbar -->
+    <section class="section-nav">
+<div class="navbar">
+    
+    <div class="category-list"><h4>Category </h4><hr></div>
+</div>
     <h1>dashboard!</h1>
 
     <?php require 'views/footer.php'; ?>
+    <script src="Other/login.js"></script>
+
 </body>
 </html>

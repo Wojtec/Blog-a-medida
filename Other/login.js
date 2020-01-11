@@ -1,3 +1,4 @@
+window.onload = function(){
 // **************** Login Modal *********************
 // Login btn for open modal window
 const loginBtn = document.getElementById('login-btn');
@@ -28,3 +29,6 @@ closeReg.addEventListener('click',function(){
     const regModal = document.getElementById('register-modal');
     regModal.style.display = "none";
 })
+
+
+}
