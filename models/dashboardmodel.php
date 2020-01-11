@@ -37,6 +37,13 @@ class dashboardModel extends model
                 array_push($posts, $post);
             }
             
+            foreach ($posts as $post)
+            {
+                $post->comments = $this->getCommentsFromPostId($post->post_id);
+
+                var_dump($post->comments);
+            }
+
             return $posts;
         }
         catch(PDOException $e)

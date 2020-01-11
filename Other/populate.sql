@@ -30,6 +30,7 @@ values
 (6, 2, 3, "hee hee", '2020/1/14'),
 (7, 3, 3, "where is my cheese?", '2020/1/14');
 
+select * from categories;
 select * from posts;
 select * from comments;
 select * from users;
