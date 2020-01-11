@@ -40,11 +40,47 @@ class dashboardModel extends model
             foreach ($posts as $post)
             {
                 $post->comments = $this->getCommentsFromPostId($post->post_id);
+                $post->user = $this->getUserByUserId($post->user_id);
 
-                var_dump($post->comments);
+                foreach ($post->comments as $comment)
+                {
+                    if ($comment->user_id != null)
+                    {
+                        $comment->user = $this->getUserByUserId($comment->user_id);
+                    }
+                }
             }
 
+            var_dump($posts);
+
             return $posts;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return [];
+        }
+    }
+
+    public function getUserByUserId($userId)
+    {
+        try
+        {
+            $query = $this->db->connect()->query('
+            select * from users
+            where user_id = ' . $userId . ';
+            ');
+
+            $row = $query->fetch();
+
+            $user = new user();
+            $user->user_id = $row['user_id'];
+            $user->user_name    = $row['user_name'];
+            $user->email  = $row['email'];
+            $user->pass  = $row['pass'];
+            
+            
+            return $user;
         }
         catch(PDOException $e)
         {
