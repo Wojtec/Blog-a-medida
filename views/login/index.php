@@ -5,26 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/reset.css">
-    <link rel="stylesheet" href="<?php echo constant('URL');?>public/styles/myCss.css">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/styles/myCss.css">
 
     <title>Blog</title>
 </head>
 <body>
-<?php require 'views/header.php'; ?>
 
-    </section>
+    <?php require 'views/header.php'; ?>
 
-    <form action="">
+    <form action="<?php echo constant('URL'); ?>dashboard" method="post">
         <p>Email</p>
-        <input type="email" name="" id="">
+        <input type="email" name="email" required>
         <p>Password</p>
-        <input type="password" name="" id="">
-        <input type="button" value="Submit">
+        <input type="password" name="password" required>
+        <button type="submit">Submit</button>
     </form>
     
     <?php require 'views/footer.php'; ?>
-
-    <script src="Other/login.js"></script>
 
 </body>
 </html>

@@ -23,7 +23,8 @@ class dashboardModel extends model
             inner join users on posts.user_id = users.user_id
             where publish_date < now() and is_public = true
             order by publish_date;');
-            
+
+            if (!$query) return [];
             
             while($row = $query->fetch()){
                 $post = new post();
@@ -62,6 +63,33 @@ class dashboardModel extends model
         }
     }
 
+    public function getUserByEmailPassword($email, $password)
+    {
+        try
+        {
+            $query = $this->db->connect()->query('
+            select * from users
+            where email = ' . $email . ' and pass = ' . $password . ';'
+            );
+
+            if (!$query) return null;
+
+            $row = $query->fetch();
+
+            $user = new user();
+            $user->user_id = $row['user_id'];
+            $user->user_name    = $row['user_name'];
+            $user->email  = $row['email'];
+            $user->pass  = $row['pass'];
+            
+            return $user;
+        }
+        catch(PDOException $e)
+        {
+            return null;
+        }
+    }
+
     public function getUserByUserId($userId)
     {
         try
@@ -70,6 +98,8 @@ class dashboardModel extends model
             select * from users
             where user_id = ' . $userId . ';
             ');
+
+            if (!$query) return null;
 
             $row = $query->fetch();
 
@@ -85,7 +115,7 @@ class dashboardModel extends model
         catch(PDOException $e)
         {
             echo "sql error " . $e.getMessage();
-            return [];
+            return null;
         }
     }
 
@@ -100,6 +130,8 @@ class dashboardModel extends model
             where post_id = ' . $postId . ';
             ');
 
+            if (!$query) return [];
+            
             while($row = $query->fetch()){
                 $comment = new comment();
                 $comment->comment_id = $row['comment_id'];
