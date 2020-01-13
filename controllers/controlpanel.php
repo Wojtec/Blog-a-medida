@@ -15,7 +15,7 @@ class controlpanel extends controller
             $user = $this->model->getUserByUserId($_SESSION['user_id']);
             $this->view->user = $user;
         } else {
-            $this->view->render('login/index');
+            header("Location: " . constant("URL") . "login");
         }
 
         $this->view->render('controlpanel/index');

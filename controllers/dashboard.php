@@ -15,7 +15,6 @@ class dashboard extends controller
             $user = $this->model->getUserByUserId($_SESSION['user_id']);
             $this->view->user = $user;
         }
-
         $posts = $this->model->getPosts();
         $this->view->render('dashboard/index');
     }
