@@ -20,6 +20,8 @@ class register extends controller
             $user->pass = $password;
 
             $this->model->insert_user($user);
+            
+            header("Location: " . constant("URL") . "login");
         }
 
         $this->view->render('register/index');

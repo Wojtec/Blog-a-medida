@@ -31,7 +31,6 @@ class login extends controller
         {
             $user = $this->model->getUserByUserId($_SESSION['user_id']);
             $this->view->user = $user;
-            echo '<p>Logged in as ' . $user->user_name . '</p>';
             header("Location: " . constant("URL") . "dashboard");
         } else {
             $this->view->render('login/index');
