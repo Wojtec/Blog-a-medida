@@ -13,12 +13,12 @@
 
     
     <h1>register!</h1>
-              <!-- Register -->
-              <section>
+    <!-- Register -->
+    <section>
         <!-- Modal -->
         <div id="register-modal" class="login-modal">
             <!-- Modal container -->
-            <form class="modal-cont" action="">
+            <form class="modal-cont" action="<?php echo constant('URL');?>register" method="post">
                 <!-- register img -->
                 <div class="logo-login">
                 <a href="<?php echo constant('URL');?>"><span id="close-reg" class="close">&times;</span></a>

@@ -9,56 +9,16 @@ class registerModel extends model
         parent::__construct();
     }
 
-    public function getUserByUserId($userId)
-    {
+    public function insert_user($user){
         try
         {
-            $query = $this->db->connect()->query('
-            select * from users
-            where user_id = ' . $userId . ';
-            ');
+            $query = $this->db->connect()->prepare('insert into users (user_name, email, pass) values (:user_name, :email, :pass)');
 
-            if (!$query) return null;
-
-            $row = $query->fetch();
-
-            $user = new user();
-            $user->user_id = $row['user_id'];
-            $user->user_name    = $row['user_name'];
-            $user->email  = $row['email'];
-            $user->pass  = $row['pass'];
-            
-            
-            return $user;
-        }
-        catch(PDOException $e)
-        {
-            echo "sql error " . $e.getMessage();
-            return null;
-        }
-    }
-
-    public function getUserByEmail($email)
-    {
-        try
-        {
-            $query = $this->db->connect()->query('
-            select * from users
-            where email = ' . $email . ';
-            ');
-
-            if (!$query) return null;
-
-            $row = $query->fetch();
-
-            $user = new user();
-            $user->user_id = $row['user_id'];
-            $user->user_name    = $row['user_name'];
-            $user->email  = $row['email'];
-            $user->pass  = $row['pass'];
-            
-            
-            return $user;
+            $query->execute([
+                'user_name' => $user->user_name,
+                'email' => $user->email,
+                'pass' => $user->pass
+            ]);
         }
         catch(PDOException $e)
         {
