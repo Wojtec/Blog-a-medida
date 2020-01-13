@@ -12,6 +12,26 @@ class dashboardModel extends model
         parent::__construct();
     }
 
+    public function commentPostByPostId($postId, $userId, $commentText)
+    {
+        try
+        {
+            $query = $this->db->connect()->prepare('insert into comments (user_id, post_id, comment_text, comment_date) values (:user_id, :post_id, :comment_text :comment_date)');
+
+            $query->execute([
+                'user_id' => $userId,
+                'post_id' => $postId,
+                'comment_text' => $commentText,
+                'comment_date' => date("Y-m-d H:i:s")
+            ]);
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return [];
+        }
+    }
+
     public function getPosts()
     {
         $posts = [];
