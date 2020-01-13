@@ -8,10 +8,10 @@ class register extends controller
 
     function render()
     {
-        if (isset($_POST['userName']) && isset($_POST['emailName']) && isset($_POST['password']))
+        if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']))
         {
-            $user_name = $_POST['userName'];
-            $email = $_POST['emailName'];
+            $user_name = $_POST['username'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
 
             $user = new user();

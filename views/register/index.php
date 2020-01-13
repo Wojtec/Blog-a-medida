@@ -5,53 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/reset.css">
-    <link rel="stylesheet" href="<?php echo constant('URL');?>public/styles/myCss.css">
 
     <title>Blog</title>
 </head>
 <body>
 
+    <form action="<?php echo constant('URL'); ?>register" method="post">
+        <p>Username</p>
+        <input type="text" name="username" required>
+        <p>Email</p>
+        <input type="email" name="email" required>
+        <p>Password</p>
+        <input type="password" name="password" required>
+        <p>Repeat password</p>
+        <input type="password" name="password_confirmation" required>
+        <button type="submit">Submit</button>
+    </form>
     
-    <h1>register!</h1>
-    <!-- Register -->
-    <section>
-        <!-- Modal -->
-        <div id="register-modal" class="login-modal">
-            <!-- Modal container -->
-            <form class="modal-cont" action="<?php echo constant('URL');?>register" method="post">
-                <!-- register img -->
-                <div class="logo-login">
-                <a href="<?php echo constant('URL');?>"><span id="close-reg" class="close">&times;</span></a>
-                    <img src="assets/login.jpg" alt="logo-login" width="150">
-                </div>
-                <!-- input container -->
-                <div class="log-container">
-                    <div>  <label for="userName">Username</label>
-                        <input type="text" placeholder="Your Login" name="userName" required>
-                    </div>
-                   <div>
-                    <label for="emailName">E-mail</label>
-                    <input type="text" placeholder="Your E-mail" name="emailName" required>
-                   </div>
-                    <div>
-                        <label for="password">Password</label>
-                        <input type="text" placeholder="Your Password" name="password" required>
-                    </div>
-                   <div>
-                    <label for="sec-password">Confirm Password</label>
-                    <input type="text" placeholder="Your Password" name="sec-password" required>
-                   </div>
-                   
-                </div>                   
-                <!-- Register btn's -->
-                <div class="login-btns">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    </section>
-    
-    <script src="Other/login.js"></script>
+    <?php 
+        echo '<p>You already have an account? <a href="' . constant("URL") . 'login">login</a></p>';
+    ?>
 
 </body>
 </html>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/reset.css">
-    <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/styles/myCss.css">
 
     <title>Blog</title>
 </head>
@@ -20,8 +19,8 @@
     </form>
     
     <?php 
-    echo '<p>You don\'t have an account? <a href="' . constant("URL") . 'register">register now</a></p>';
-    echo '<p>You don\'t want to login? <a href="' . constant("URL") . 'dashboard">continue anonymously</a></p>';
+        echo '<p>You don\'t have an account? <a href="' . constant("URL") . 'register">register</a></p>';
+        echo '<p>You don\'t want to login? <a href="' . constant("URL") . 'dashboard">continue anonymously</a></p>';
     ?>
 
 </body>
