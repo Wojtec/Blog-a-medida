@@ -52,8 +52,6 @@ class dashboardModel extends model
                 }
             }
 
-            var_dump($posts);
-
             return $posts;
         }
         catch(PDOException $e)

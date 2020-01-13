@@ -18,6 +18,11 @@
         <input type="password" name="password" required>
         <button type="submit">Submit</button>
     </form>
+    
+    <?php 
+    echo '<p>You don\'t have an account? <a href="' . constant("URL") . 'register">register now</a></p>';
+    echo '<p>You don\'t want to login? <a href="' . constant("URL") . 'dashboard">continue anonymously</a></p>';
+    ?>
 
 </body>
 </html>
