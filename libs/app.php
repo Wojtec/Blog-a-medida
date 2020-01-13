@@ -27,7 +27,7 @@ class app
             {
                 if (isset($url[2]))
                 {
-                    $controller->{ $url[2] }();
+                    $controller->{ $url[1] }( $url[2] );
                 }
                 else
                 {

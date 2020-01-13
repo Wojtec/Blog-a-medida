@@ -25,15 +25,15 @@
                             </select>
                         </div>
                         <div class="title-date">
-                            <div class="title">'.$post->title.'</div>
-                            <div class="date">'.$post->publish_date.'</div>
+                            <div class="title">' . $post->title . '</div>
+                            <div class="date">' . $post->publish_date . '</div>
                         </div>
                     </div>
                         <div class="sec-div">
-                            <div class="content-text-message">'.$post->content.'</div>
+                            <div class="content-text-message">' . $post->content . '</div>
                         </div>
                         <div class="third-div" >
-                            <div class="author">'.$post->user->user_name.'</div>
+                            <div class="author">' . $post->user->user_name . '</div>
                         </div>
                         
                         <div class="fifth-div">';
@@ -44,10 +44,10 @@
                         }
 
                         echo '
-                        <div class="fourth-div">
-                            <input type="text" class="comments"></input>
-                            <button>Comment</button>
-                        </div>
+                        <form action="' . constant("URL") . 'dashboard/comment/' . $post->post_id . '" method = "post">
+                            <input type = "text" name="comment_text"></input>
+                            <input type = "submit">Comment</input>
+                        </form>
                         <hr>
                     </div>
                 </div>

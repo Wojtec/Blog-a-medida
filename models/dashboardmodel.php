@@ -16,11 +16,13 @@ class dashboardModel extends model
     {
         try
         {
-            $query = $this->db->connect()->prepare('insert into comments (user_id, post_id, comment_text, comment_date) values (:user_id, :post_id, :comment_text :comment_date)');
 
+            
+            $query = $this->db->connect()->prepare('insert into comments (user_id, post_id, comment_text, comment_date) values (:user_id, :post_id, :comment_text, :comment_date)');
+            
             $query->execute([
-                'user_id' => $userId,
-                'post_id' => $postId,
+                'post_id' => intval($postId),
+                'user_id' => isset($userId) ? intval($userId) : null,
                 'comment_text' => $commentText,
                 'comment_date' => date("Y-m-d H:i:s")
             ]);

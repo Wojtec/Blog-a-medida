@@ -19,5 +19,23 @@ class dashboard extends controller
         $this->view->posts = $posts;
         $this->view->render('dashboard/index');
     }
+
+    function comment($post_id)
+    {
+        session_start();
+
+        $userId = null;
+
+        if (isset($_SESSION["user_id"]))
+        {
+            $userId = $_SESSION["user_id"];
+        }
+
+        $comment_text = $_POST["comment_text"];
+
+        $this->model->commentPostByPostId($post_id, $userId, $comment_text);
+        
+        header("Location: " . constant("URL") . "dashboard");
+    }
 }
 ?>
