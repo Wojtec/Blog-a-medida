@@ -9,9 +9,15 @@
 </head>
 <body>
     <?php require 'views/header.php'; ?>
-
-    <h1>control panel!</h1>
-
+   
+    <form action="<?php echo constant('URL'); ?>controlpanel" method="post">
+            <label for="new-catgory">Category</label>
+            <input type="text" name="new-category">
+            <label for="new-title">Title</label>
+            <input type="text" name="new-title">
+            <textarea name="post-message" rows="10" cols="100">Text area.</textarea>    
+            <input type="submit" name="subit-new-post">
+    </form>
     <?php require 'views/footer.php'; ?>
 </body>
 </html>

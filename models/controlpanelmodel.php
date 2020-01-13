@@ -38,6 +38,16 @@ class controlpanelModel extends model
             return null;
         }
     }
+
+    public function insertPost($post){
+
+        var_dump($post);
+
+
+    }
+
+
+
 }
 
 ?>
