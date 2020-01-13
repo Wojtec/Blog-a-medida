@@ -1,15 +1,13 @@
-<h1>Blogsite</h1>
 <?php
+
+echo '<a href="' . constant("URL") . 'dashboard"><h1>Blogsite</h1></a>';
+
 
 if (isset($this->user))
 {
-
-    echo '
-    <form action="' . constant("URL") . 'login/logout">
-        <p>Logged in as ' . $this->user->user_name . '</p>
-        <button type="submit">Logout</button>
-    </form>
-    ';
+    echo '<p>Logged in as ' . $this->user->user_name . '</p>';
+    echo '<a href="' . constant("URL") . 'controlpanel"><p>Control Panel</p></a>';
+    echo '<a href="' . constant("URL") . 'login/logout"><p>Logout</p></a>';
 }
 
 ?>
