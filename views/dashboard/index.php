@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/reset.css">
-
     <title>Blog</title>
 </head>
 <body>
-
     <?php require 'views/header.php'; ?>
-    
-    <h1>dashboard!</h1>
+
+    <?php
+        foreach($this->posts as $post) {
+            echo '
+            <section class="section-post">
+            
+                <div class="post-container">
+                    <div class="first-div">
+                        <div class="category">
+                            <label for="category-selector">Category</label>
+                            <select name="category-selector" id="category-selector">
+                                <option value="opt1">books</option>
+                                <option value="opt2">movie</option>
+                            </select>
+                        </div>
+                        <div class="title-date">
+                            <div class="title">'.$post->title.'</div>
+                            <div class="date">'.$post->publish_date.'</div>
+                        </div>
+                    </div>
+                        <div class="sec-div">
+                            <div class="content-text-message">'.$post->content.'</div>
+                        </div>
+                        <div class="third-div" >
+                            <div class="author">'.$post->user->user_name.'</div>
+                        </div>
+                        
+                        <div class="fifth-div">';
+                        
+                        foreach($post->comments as $comment) 
+                        {
+                            var_dump($comment);
+                        }
+
+                        echo '
+                        <div class="fourth-div">
+                            <input type="text" class="comments"></input>
+                            <button>Comment</button>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </section>';
+            
+        }
+    ?>
 
     <?php require 'views/footer.php'; ?>
-    
 </body>
 </html>

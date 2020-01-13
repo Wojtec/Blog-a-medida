@@ -16,6 +16,7 @@ class dashboard extends controller
             $this->view->user = $user;
         }
         $posts = $this->model->getPosts();
+        $this->view->posts = $posts;
         $this->view->render('dashboard/index');
     }
 }
