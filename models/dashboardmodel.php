@@ -69,7 +69,7 @@ class dashboardModel extends model
         {
             $query = $this->db->connect()->query('
             select * from users
-            where email = ' . $email . ' and pass = ' . $password . ';'
+            where email = "' . $email . '" and pass = "' . $password . '";'
             );
 
             if (!$query) return null;
