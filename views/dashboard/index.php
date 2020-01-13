@@ -11,17 +11,12 @@
     <title>Blog</title>
 </head>
 <body>
+
     <?php require 'views/header.php'; ?>
-    <!-- left-navbar -->
-    <section class="section-nav">
-<div class="navbar">
     
-    <div class="category-list"><h4>Category </h4><hr></div>
-</div>
     <h1>dashboard!</h1>
 
     <?php require 'views/footer.php'; ?>
-    <script src="Other/login.js"></script>
-
+    
 </body>
 </html>
