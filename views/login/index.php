@@ -10,7 +10,13 @@
 <body>
     <?php require 'views/header.php'; ?>
 
-    <h1>login!</h1>
+    <form action="">
+        <p>Email</p>
+        <input type="email" name="" id="">
+        <p>Password</p>
+        <input type="password" name="" id="">
+        <input type="button" value="Submit">
+    </form>
     
     <?php require 'views/footer.php'; ?>
 </body>
