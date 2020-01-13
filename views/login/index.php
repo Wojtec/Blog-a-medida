@@ -11,8 +11,6 @@
 </head>
 <body>
 
-    <?php require 'views/header.php'; ?>
-
     <form action="<?php echo constant('URL'); ?>login" method="post">
         <p>Email</p>
         <input type="email" name="email" required>
@@ -20,8 +18,6 @@
         <input type="password" name="password" required>
         <button type="submit">Submit</button>
     </form>
-    
-    <?php require 'views/footer.php'; ?>
 
 </body>
 </html>

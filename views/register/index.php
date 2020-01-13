@@ -10,7 +10,7 @@
     <title>Blog</title>
 </head>
 <body>
-    <?php require 'views/header.php'; ?>
+
     
     <h1>register!</h1>
               <!-- Register -->
@@ -50,7 +50,7 @@
             </form>
         </div>
     </section>
-    <?php require 'views/footer.php'; ?>
+    
     <script src="Other/login.js"></script>
 
 </body>
