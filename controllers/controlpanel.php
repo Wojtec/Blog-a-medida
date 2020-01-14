@@ -6,18 +6,10 @@ class controlpanel extends controller
         parent::__construct();
     }
 
-    function render()
+    function newPost()
     {
         session_start();
-
-        if (isset($_SESSION['user_id']))
-        {
-            $user = $this->model->getUserByUserId($_SESSION['user_id']);
-            $this->view->user = $user;
-        } else {
-            header("Location: " . constant("URL") . "login");
-        }
-
+        
         if(isset($_SESSION['user_id']) && isset($_POST['new-category']) && isset($_POST['tags']) && isset($_POST['new-title']) && isset($_POST['post-message']))
         {
             $user_id = $_SESSION['user_id'];
@@ -38,12 +30,20 @@ class controlpanel extends controller
             $post->is_public = true;
 
             $this->model->insertPost($post);
-
-
         }
+    }
 
+    function render()
+    {
+        session_start();
 
-
+        if (isset($_SESSION['user_id']))
+        {
+            $user = $this->model->getUserByUserId($_SESSION['user_id']);
+            $this->view->user = $user;
+        } else {
+            header("Location: " . constant("URL") . "login");
+        }
 
         $this->view->render('controlpanel/index');
     }
