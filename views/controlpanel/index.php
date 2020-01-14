@@ -26,6 +26,18 @@
     ?>
 
     <hr>
+
+    <?php
+        foreach($this->userPosts as $userPost)
+        {
+            var_dump($userPost);
+            echo '
+            <p> "'. $userPost->title .'"</p>
+            <p> "'. $userPost->content .'"</p>
+            <p> "'. $userPost->tags .'"</p>
+            ';
+        }
+    ?>
    
     <form action="<?php echo constant('URL'); ?>controlpanel/newPost" method="post">
              <label for="start-date">Start date:</label>

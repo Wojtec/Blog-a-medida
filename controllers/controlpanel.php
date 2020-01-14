@@ -55,6 +55,10 @@ class controlpanel extends controller
 
         $categories = $this->model->getCategories();
         $this->view->categories = $categories;
+
+        $userPosts = $this->model->getUserPosts($_SESSION['user_id']);
+        $this->view->userPosts = $userPosts;
+
         $this->view->render('controlpanel/index');
     }
 

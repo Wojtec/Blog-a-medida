@@ -117,6 +117,34 @@ class controlpanelModel extends model
             echo "sql error " . $e.getMessage();
         }
     }
+
+    public function getUserPosts($userId){
+        $postsArray = [];
+        try
+        {
+            $query = $this->db->connect()->query('
+            select * from posts
+            where user_id = ' . intval($userId) . ';
+            ');
+            if(!$query) return null;
+        while ($row = $query->fetch()){
+            $posts = new post();
+            $posts->user_id = $row['user_id'];
+            $posts->category_id = $row['category_id'];
+            $posts->publish_date = $row['publish_date'];
+            $posts->title = $row['title'];
+            $posts->content = $row['content'];
+            $posts->tags = $row['tags'];
+            array_push($postsArray,$posts);
+        }
+            return $postsArray;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
+    }
 }
 
 ?>
