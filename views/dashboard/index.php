@@ -9,6 +9,7 @@
 </head>
 <body>
     <?php require 'views/header.php'; ?>
+    <?php require 'views/search.php'; ?>
 
     <?php
         foreach($this->posts as $post) {

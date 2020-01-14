@@ -37,5 +37,15 @@ class dashboard extends controller
         
         header("Location: " . constant("URL") . "dashboard");
     }
+
+    function search()
+    {
+        // TODO: Handle invalid searches
+        $target = $_GET["target"];
+
+        $posts = $this->model->getPostsByContent($target);
+        $this->view->posts = $posts;
+        $this->view->render('dashboard/index');
+    }
 }
 ?>

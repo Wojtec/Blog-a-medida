@@ -49,3 +49,14 @@ values (x, y, z, xx);
 -- Placing a new comment in a post anonymously given the post_id
 insert into comments (post_id, comment_text, comment_date)
 values (x, y, z);
+
+-- Show posts that contains X string in title || content || tags
+select * from posts
+where 
+    (
+    title           like '%X%' or 
+    content	    	like '%X%' or
+    tags            like '%,X,%'
+    ) and
+    publish_date	< now() and
+    is_public		= true;
