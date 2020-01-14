@@ -86,6 +86,7 @@ hr {
     justify-content: space-around;
     
     margin: 0 20px;
+    margin-top: 10px;
 }
 
 .comment-input {

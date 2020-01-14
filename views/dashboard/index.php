@@ -59,7 +59,7 @@
                         <div class="comment-box">
                             <p class="comment-author">' . (isset($comment->user) ? $comment->user->user_name : 'Anonymous') . ' says: </p>
                             <p class="comment-text">' . $comment->comment_text . '</p>
-                            <p class="comment-date">Commented in ' . $comment->comment_date . '</p>
+                            <p class="comment-date">Commented at ' . $comment->comment_date . '' . (isset($comment->user) && isset($this->user) && strcmp($comment->user->user_name, $this->user->user_name) == 0 ? ' <a href="' . constant("URL") . 'dashboard/delete/' . $post->post_id . '">Delete</a>' : '') . '</p>
                         </div>
                         ';
                     }
