@@ -10,8 +10,14 @@ class dashboard extends controller
     {
         $this->loadUserNameIntoViewIfLoggedIn();
         $this->loadPublishedPostsIntoView();
+        $this->loadCategoriesIntoView();
         
         $this->view->render('dashboard/index');
+    }
+
+    private function loadCategoriesIntoView()
+    {
+        $this->view->categories = loadModel("category")->getCategories();
     }
 
     private function loadUserNameIntoViewIfLoggedIn()
