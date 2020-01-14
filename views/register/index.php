@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="public/styles/full-page-form.css">
     <title>Blog</title>
 </head>
-<body>
+<body class="back-color">
 
-    <form action="<?php echo constant('URL'); ?>register/register" method="post">
+    <form class="front-color" action="<?php echo constant('URL'); ?>register/register" method="post">
         <div>
             <input type="text" placeholder="Username" name="username" required>
             <input type="email" placeholder="Email" name="email" required>

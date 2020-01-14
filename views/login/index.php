@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="public/styles/full-page-form.css">
     <title>Blog</title>
 </head>
-<body>
+<body class="back-color">
 
-    <form action="<?php echo constant('URL'); ?>login/login" method="post" style="z-index: 10;">
+    <form class="front-color" action="<?php echo constant('URL'); ?>login/login" method="post" style="z-index: 10;">
         <div>
             <input type="email" name="email" placeholder="email" required>
             <input type="password" name="password" placeholder="password" required>
