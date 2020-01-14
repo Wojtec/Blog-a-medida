@@ -13,22 +13,14 @@ class postmodel extends model
     public function insertPost($post){
         try
         {
-            $query = $this->db->connect()->prepare('insert into posts (user_id, title, content, is_public, tags, publish_date) values (:user_id, :title, :content, :is_public,:tags, :publish_date)');
+            $query = $this->db->connect()->prepare('insert into posts (user_id, category_id, title, content, is_public, tags, publish_date) values (' . intval($post->user_id) . ', ' . intval($post->category_id) . ', "' . $post->title . '", "' . $post->content . '", ' . $post->is_public . ', "' . $post->tags . '", "' . $post->publish_date->format('Y-m-d H:i:s') . '")');
     
-            $query->execute([
-                'user_id' => $post->user_id,
-                'title' => $post->title,
-                'content' => $post->content,
-                'is_public' => $post->is_public,
-                'tags' => $post->tags,
-                'publish_date' => $post->publish_date
-            ]);
+            $query->execute();
     
         }
         catch(PDOException $e)
         {
             echo "sql error " . $e.getMessage();
-            return null;
         }
     }
     
