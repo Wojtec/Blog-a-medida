@@ -43,8 +43,13 @@ class controlpanel extends controller
         $this->loadUserNameIntoView();
         $this->loadCategoriesIntoView();
         $this->loadUserPosts();
-
+        $this->loadPostCommentedInToView();
         $this->view->render('controlpanel/index');
+    }
+    
+    private function loadPostCommentedInToView(){
+
+        $this->view->userId = loadModel("post")->getPostWithComments($_SESSION['user_id']);
     }
 
     private function loadUserPosts()

@@ -28,6 +28,7 @@ class categorymodel extends model
 
             return $categories;
         }
+        
         catch(PDOException $e)
         {
             echo "sql error " . $e.getMessage();
