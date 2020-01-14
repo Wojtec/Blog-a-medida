@@ -1,2 +1,5 @@
 <hr>
-<p>Wojtek & Axel</p>
+
+<div class="footer">
+    <p class="vertical-centered-text">Wojtek & Axel</p>
+</div>

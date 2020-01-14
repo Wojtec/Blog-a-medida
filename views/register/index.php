@@ -12,7 +12,7 @@
 </head>
 <body class="back-color">
 
-    <form class="front-color" action="<?php echo constant('URL'); ?>register/register" method="post">
+    <form class="front-color vertical-centered-text" action="<?php echo constant('URL'); ?>register/register" method="post">
         <div>
             <input type="text" placeholder="Username" name="username" required>
             <input type="email" placeholder="Email" name="email" required>

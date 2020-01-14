@@ -12,7 +12,7 @@
 </head>
 <body class="back-color">
 
-    <form class="front-color" action="<?php echo constant('URL'); ?>login/login" method="post" style="z-index: 10;">
+    <form class="front-color vertical-centered-text" action="<?php echo constant('URL'); ?>login/login" method="post" style="z-index: 10;">
         <div>
             <input type="email" name="email" placeholder="email" required>
             <input type="password" name="password" placeholder="password" required>

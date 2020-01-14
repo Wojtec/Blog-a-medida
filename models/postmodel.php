@@ -34,44 +34,6 @@ class postmodel extends model
         var_dump($filterPost);
         return $filterPost;
     }
-    //get posts with comments
-    public function getPostWithComments($user_id){
-        $postsCommentsArray = [];
-        try
-        {
-            $query = $this->db->connect()->query('select * from posts, comments where posts.user_id = ' . intval($user_id) .' and comments.user_id = ' . intval($user_id) .';');
-
-            if(!$query) return null;
-            while($row = $query->fetch()){
-                $comPost = new post();
-                $comPost->user_id = $row['user_id'];
-                $comPost->category_id = $row['category_id'];
-                $comPost->publish_date = $row['publish_date'];
-                $comPost->title = $row['title'];
-                $comPost->content = $row['content'];
-                array_push($postsCommentsArray,$comPost);
-
-                $comPost = new comment();
-                $comPost->user_id = $row['user_id'];
-                $comPost->publish_date = $row['comment_date'];
-                $comPost->comment_text = $row['comment_text'];
-                array_push($postsCommentsArray,$comPost);
-
-            }
-        
-            var_dump($postsCommentsArray);
-
-        
-        }
-        catch(PDOException $e)
-        {
-            echo "sql error " . $e.getMessage();
-            return null;
-        }
-
-
-    }
-
 
     public function insertPost($post){
         try
@@ -164,11 +126,13 @@ class postmodel extends model
             
             $commentModel = loadModel('comment');
             $userModel = loadModel('user');
+            $categoryModel = loadModel('category');
 
             foreach ($posts as $post)
             {
                 $post->comments = $commentModel->getCommentsFromPostId($post->post_id);
                 $post->user = $userModel->getUserByUserId($post->user_id);
+                $post->category = $categoryModel->getCategoryById($post->category_id);
 
                 foreach ($post->comments as $comment)
                 {

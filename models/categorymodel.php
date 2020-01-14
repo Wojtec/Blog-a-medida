@@ -8,6 +8,24 @@ class categorymodel extends model
         parent::__construct();
     }
 
+    public function getCategoryById($category_id)
+    {
+        try
+        {
+            $query = $this->db->connect()->query('select * from categories where category_id = ' . $category_id . '');
+            $row = $query->fetch();
+            $category = new category();
+            $category->category_id = $row['category_id'];
+            $category->category_name = $row['category_name'];
+            return $category;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
+    }
+
     public function getCategories()
     {
         $categories = [];

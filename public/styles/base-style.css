@@ -1,10 +1,4 @@
-a:visited {
-    color: black;
-}
 
-a:hover {
-    color: rgb(0, 127, 201);
-}
 
 body {
     font-family: 'Quicksand', sans-serif;

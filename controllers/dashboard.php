@@ -11,11 +11,8 @@ class dashboard extends controller
         $this->loadUserNameIntoViewIfLoggedIn();
         $this->loadPublishedPostsIntoView();
         $this->loadCategoriesIntoView();
-        $this->filterPost();
+        
         $this->view->render('dashboard/index');
-    }
-    private function filterPost(){
-        $this->view->posts = loadModel('post')->getPostsFilteredByCategoryName($_POST['catFilter']);
     }
     private function loadCategoriesIntoView()
     {
@@ -49,7 +46,7 @@ class dashboard extends controller
             $userId = $_SESSION["user_id"];
         }
         
-        loadModel('post')->commentPostByPostId($post_id, $userId, $_POST["comment_text"]);
+        loadModel('post')->commentPostByPostId($post_id, $userId, $_POST["comment-text"]);
         
         header("Location: " . constant("URL") . "dashboard");
     }
