@@ -46,6 +46,7 @@ class controlpanel extends controller
         $this->loadPostCommentedInToView();
         $this->view->render('controlpanel/index');
     }
+    
     private function loadPostCommentedInToView(){
 
         $this->view->userId = loadModel("post")->getPostWithComments($_SESSION['user_id']);

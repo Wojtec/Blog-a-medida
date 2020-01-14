@@ -11,10 +11,12 @@ class dashboard extends controller
         $this->loadUserNameIntoViewIfLoggedIn();
         $this->loadPublishedPostsIntoView();
         $this->loadCategoriesIntoView();
-        
+        $this->filterPost();
         $this->view->render('dashboard/index');
     }
-
+    private function filterPost(){
+        $this->view->posts = loadModel('post')->getPostsFilteredByCategoryName($_POST['catFilter']);
+    }
     private function loadCategoriesIntoView()
     {
         $this->view->categories = loadModel("category")->getCategories();

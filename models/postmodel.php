@@ -10,6 +10,30 @@ class postmodel extends model
         parent::__construct();
     }
 
+    public function getPostsFilteredByCategoryName($catFilter){
+        $filterPost = [];
+        try
+        {
+            $query = $this->db->connect()->query('select * from posts where posts.category_id = ' . $catFilter.'');
+            if(!$query) return null;
+
+            while($row = $query->fetch()){
+                $filPost = new post();
+                $filPost->category_id = $row['category_id'];
+                $filPost->publish_date = $row['publish_date'];
+                $filPost->title = $row['title'];
+                $filPost->content = $row['content'];
+                array_push($filterPost,$filPost);
+            }
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
+        var_dump($filterPost);
+        return $filterPost;
+    }
     //get posts with comments
     public function getPostWithComments($user_id){
         $postsCommentsArray = [];
