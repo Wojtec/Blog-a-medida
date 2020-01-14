@@ -1,6 +1,15 @@
 <?php
 require_once "controllers/failure.php";
 
+function loadModel($model)
+{
+    $modelPath = 'models/' . $model . 'model.php';
+    require_once $modelPath;
+    $modelClassName = $model . 'model';
+    $model = new $modelClassName;
+    return $model;
+}
+
 class app
 {
     function __construct()
@@ -21,17 +30,16 @@ class app
         {
             require_once $controllerPath;
             $controller = new $controllerName;
-            $controller->loadModel($controllerName);
 
             if (isset($url[1]))
             {
                 if (isset($url[2]))
                 {
-                    $controller->{ $url[1] }( $url[2] );
+                    $controller->{ $url[1] . 'Action' }( $url[2] );
                 }
                 else
                 {
-                    $controller->{ $url[1] }();
+                    $controller->{ $url[1] . 'Action' }();
                 }
             }
             else

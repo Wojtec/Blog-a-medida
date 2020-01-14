@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <form action="<?php echo constant('URL'); ?>login" method="post">
+    <form action="<?php echo constant('URL'); ?>login/login" method="post">
         <p>Email</p>
         <input type="email" name="email" required>
         <p>Password</p>

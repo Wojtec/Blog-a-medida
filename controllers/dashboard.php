@@ -1,26 +1,36 @@
 <?php
 class dashboard extends controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function render()
+    public function render()
+    {
+        $this->loadUserNameIntoViewIfLoggedIn();
+        $this->loadPublishedPostsIntoView();
+        
+        $this->view->render('dashboard/index');
+    }
+
+    private function loadUserNameIntoViewIfLoggedIn()
     {
         session_start();
 
         if (isset($_SESSION['user_id']))
         {
-            $user = $this->model->getUserByUserId($_SESSION['user_id']);
+            $user = loadModel('user')->getUserByUserId($_SESSION['user_id']);
             $this->view->user = $user;
         }
-        $posts = $this->model->getPosts();
-        $this->view->posts = $posts;
-        $this->view->render('dashboard/index');
     }
 
-    function comment($post_id)
+    private function loadPublishedPostsIntoView()
+    {
+        $this->view->posts = loadModel('post')->getPublishedPosts();
+    }
+
+    public function commentAction($post_id)
     {
         session_start();
 
@@ -30,21 +40,18 @@ class dashboard extends controller
         {
             $userId = $_SESSION["user_id"];
         }
-
-        $comment_text = $_POST["comment_text"];
-
-        $this->model->commentPostByPostId($post_id, $userId, $comment_text);
+        
+        loadModel('post')->commentPostByPostId($post_id, $userId, $_POST["comment_text"]);
         
         header("Location: " . constant("URL") . "dashboard");
     }
 
-    function search()
+    public function searchAction()
     {
         // TODO: Handle invalid searches
         $target = $_GET["target"];
 
-        $posts = $this->model->getPostsByContent($target);
-        $this->view->posts = $posts;
+        $this->view->posts = loadModel("post")->getPostsByContent($target);
         $this->view->render('dashboard/index');
     }
 }

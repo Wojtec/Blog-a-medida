@@ -4,9 +4,10 @@ class controlpanel extends controller
     function __construct()
     {
         parent::__construct();
+        session_start();
     }
 
-    function newPost()
+    function newPostAction() // Finish this
     {
         session_start();
         
@@ -43,36 +44,53 @@ class controlpanel extends controller
 
     function render()
     {
-        session_start();
-
-        if (isset($_SESSION['user_id']))
-        {
-            $user = $this->model->getUserByUserId($_SESSION['user_id']);
-            $this->view->user = $user;
-        } else {
-            header("Location: " . constant("URL") . "login");
-        }
-
-        $categories = $this->model->getCategories();
-        $this->view->categories = $categories;
-
-        $userPosts = $this->model->getUserPosts($_SESSION['user_id']);
-        $this->view->userPosts = $userPosts;
+        $this->redirectToLoginIfNotLoggedIn();
+        $this->loadUserNameIntoView();
+        $this->loadCategoriesIntoView();
+        $this->loadUserPosts();
 
         $this->view->render('controlpanel/index');
     }
 
-    function editCategory($categoryId)
+    private function loadUserPosts()
     {
-        $categoryName = $_POST["categoryName"];
-        $this->model->editCategory($categoryId, $categoryName);
-        $this->render();
+        $this->view->userPosts = loadModel("post")->getUserPosts($_SESSION['user_id']);
     }
 
-    function removeCategory($categoryId)
+    private function loadCategoriesIntoView()
     {
-        $this->model->removeCategory($categoryId);
-        $this->render();
+        $this->view->categories = loadModel("category")->getCategories();
+    }
+
+    private function loadUserNameIntoView()
+    {
+
+        $this->view->user = loadModel('user')->getUserByUserId($_SESSION['user_id']);
+    }
+
+    private function redirectToLoginIfNotLoggedIn()
+    {
+        if (!isset($_SESSION['user_id']))
+        {
+            header("Location: " . constant("URL") . "login");
+        }
+    }
+
+    private function redirectToControlPanel()
+    {
+        header("Location: " . constant("URL") . "controlpanel");
+    }
+
+    function editCategoryAction($categoryId)
+    {
+        loadModel("category")->editCategory($categoryId, $_POST["categoryName"]);
+        $this->redirectToControlPanel();
+    }
+
+    function removeCategoryAction($categoryId)
+    {
+        loadModel("category")->removeCategory($categoryId);
+        $this->redirectToControlPanel();
     }
 }
 ?>

@@ -1,4 +1,6 @@
 <?php
+require_once 'models/entities/user.php';
+
 class register extends controller
 {
     function __construct()
@@ -7,6 +9,11 @@ class register extends controller
     }
 
     function render()
+    {
+        $this->view->render('register/index');
+    }
+
+    function registerAction()
     {
         if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']))
         {
@@ -19,12 +26,15 @@ class register extends controller
             $user->email = $email;
             $user->pass = $password;
 
-            $this->model->insert_user($user);
+            loadModel('user')->createUser($user);
             
-            header("Location: " . constant("URL") . "login");
+            $this->redirectToDashboard();
         }
+    }
 
-        $this->view->render('register/index');
+    function redirectToDashboard()
+    {
+        header("Location: " . constant("URL") . "login");
     }
 }
 ?>

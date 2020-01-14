@@ -1,15 +1,63 @@
 <?php
+require_once 'models/entities/comment.php';
+require_once 'models/entities/post.php';
+require_once 'models/entities/user.php';
 
-require 'models/entities/category.php';
-require 'models/entities/comment.php';
-require 'models/entities/post.php';
-require 'models/entities/user.php';
-
-class dashboardModel extends model
+class postmodel extends model
 {
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function insertPost($post){
+        try
+        {
+            $query = $this->db->connect()->prepare('insert into posts (user_id, title, content, is_public, tags, publish_date) values (:user_id, :title, :content, :is_public,:tags, :publish_date)');
+    
+            $query->execute([
+                'user_id' => $post->user_id,
+                'title' => $post->title,
+                'content' => $post->content,
+                'is_public' => $post->is_public,
+                'tags' => $post->tags,
+                'publish_date' => $post->publish_date
+            ]);
+    
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
+    }
+    
+    public function getUserPosts($userId){
+        $postsArray = [];
+        try
+        {
+            $query = $this->db->connect()->query('
+            select * from posts
+            where user_id = ' . intval($userId) . ';
+            ');
+            if(!$query) return null;
+        while ($row = $query->fetch()){
+            $posts = new post();
+            $posts->user_id = $row['user_id'];
+            $posts->category_id = $row['category_id'];
+            $posts->publish_date = $row['publish_date'];
+            $posts->title = $row['title'];
+            $posts->content = $row['content'];
+            $posts->tags = $row['tags'];
+            array_push($postsArray,$posts);
+        }
+            return $postsArray;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
     }
 
     public function commentPostByPostId($postId, $userId, $commentText)
@@ -33,7 +81,7 @@ class dashboardModel extends model
         }
     }
 
-    public function getPosts()
+    public function getPublishedPosts()
     {
         $posts = [];
 
@@ -60,82 +108,24 @@ class dashboardModel extends model
                 array_push($posts, $post);
             }
             
+            $commentModel = loadModel('comment');
+            $userModel = loadModel('user');
+
             foreach ($posts as $post)
             {
-                $post->comments = $this->getCommentsFromPostId($post->post_id);
-                $post->user = $this->getUserByUserId($post->user_id);
+                $post->comments = $commentModel->getCommentsFromPostId($post->post_id);
+                $post->user = $userModel->getUserByUserId($post->user_id);
 
                 foreach ($post->comments as $comment)
                 {
                     if ($comment->user_id != null)
                     {
-                        $comment->user = $this->getUserByUserId($comment->user_id);
+                        $comment->user = $userModel->getUserByUserId($comment->user_id);
                     }
                 }
             }
 
             return $posts;
-        }
-        catch(PDOException $e)
-        {
-            echo "sql error " . $e.getMessage();
-            return [];
-        }
-    }
-
-    public function getUserByUserId($userId)
-    {
-        try
-        {
-            $query = $this->db->connect()->query('
-            select * from users
-            where user_id = ' . $userId . ';
-            ');
-
-            if (!$query) return null;
-
-            $row = $query->fetch();
-
-            $user = new user();
-            $user->user_id = $row['user_id'];
-            $user->user_name    = $row['user_name'];
-            $user->email  = $row['email'];
-            $user->pass  = $row['pass'];
-            
-            
-            return $user;
-        }
-        catch(PDOException $e)
-        {
-            echo "sql error " . $e.getMessage();
-            return null;
-        }
-    }
-
-    public function getCommentsFromPostId($postId)
-    {
-        $comments = [];
-
-        try
-        {
-            $query = $this->db->connect()->query('
-            select * from comments
-            where post_id = ' . $postId . ';
-            ');
-
-            if (!$query) return [];
-            
-            while($row = $query->fetch()){
-                $comment = new comment();
-                $comment->comment_id = $row['comment_id'];
-                $comment->user_id    = $row['user_id'];
-                $comment->post_id  = $row['post_id'];
-                $comment->comment_text  = $row['comment_text'];
-                $comment->comment_date  = $row['comment_date'];
-                array_push($comments, $comment);
-            }
-            
-            return $comments;
         }
         catch(PDOException $e)
         {
@@ -178,14 +168,14 @@ class dashboardModel extends model
             
             foreach ($posts as $post)
             {
-                $post->comments = $this->getCommentsFromPostId($post->post_id);
-                $post->user = $this->getUserByUserId($post->user_id);
+                $post->comments = loadModel("comment")->getCommentsFromPostId($post->post_id);
+                $post->user = loadModel("user")->getUserByUserId($post->user_id);
 
                 foreach ($post->comments as $comment)
                 {
                     if ($comment->user_id != null)
                     {
-                        $comment->user = $this->getUserByUserId($comment->user_id);
+                        $comment->user = loadModel("user")->getUserByUserId($comment->user_id);
                     }
                 }
             }
@@ -199,5 +189,7 @@ class dashboardModel extends model
         }
     }
 }
+
+
 
 ?>

@@ -1,12 +1,29 @@
 <?php
 class login extends controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function render()
+    public function render()
+    {
+        $this->redirectToDashboardIfAlreadyLoggedIn();
+        
+        $this->view->render('login/index');
+    }
+
+    private function redirectToDashboardIfAlreadyLoggedIn()
+    {
+        session_start();
+
+        if (isset($_SESSION['user_id']))
+        {
+            header("Location: " . constant("URL") . "dashboard");
+        }
+    }
+
+    public function loginAction()
     {
         session_start();
         
@@ -15,30 +32,21 @@ class login extends controller
             $email = $_POST['email'];
             $password = $_POST['password'];
     
-            $user = $this->model->getUserByEmailPassword($email, $password);
+            $user = loadModel('user')->getUserByEmailPassword($email, $password);
             
             if ($user != null)
             {
                 $_SESSION['user_id'] = $user->user_id;
+                header("Location: " . constant("URL") . "dashboard");
             }
             else
             {
                 header("Location: " . constant("URL") . "login");
             }
         }
-
-        if (isset($_SESSION['user_id']))
-        {
-            $user = $this->model->getUserByUserId($_SESSION['user_id']);
-            $this->view->user = $user;
-            header("Location: " . constant("URL") . "dashboard");
-        } else {
-            $this->view->render('login/index');
-        }
-
     }
 
-    function logout()
+    public function logoutAction()
     {
         session_start();
         session_destroy();

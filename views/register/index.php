@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <form action="<?php echo constant('URL'); ?>register" method="post">
+    <form action="<?php echo constant('URL'); ?>register/register" method="post">
         <p>Username</p>
         <input type="text" name="username" required>
         <p>Email</p>

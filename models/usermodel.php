@@ -1,8 +1,7 @@
 <?php
+require_once 'models/entities/user.php';
 
-require 'models/entities/user.php';
-
-class loginmodel extends model
+class usermodel extends model
 {
     public function __construct()
     {
@@ -55,8 +54,25 @@ class loginmodel extends model
             $user->email  = $row['email'];
             $user->pass  = $row['pass'];
             
-            
             return $user;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
+    }
+
+    public function createUser($user){
+        try
+        {
+            $query = $this->db->connect()->prepare('insert into users (user_name, email, pass) values (:user_name, :email, :pass)');
+
+            $query->execute([
+                'user_name' => $user->user_name,
+                'email' => $user->email,
+                'pass' => $user->pass
+            ]);
         }
         catch(PDOException $e)
         {
