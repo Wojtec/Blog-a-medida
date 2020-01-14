@@ -18,7 +18,7 @@ class controlpanel extends controller
             header("Location: " . constant("URL") . "login");
         }
 
-        if(isset($_SESSION['user_id']) && isset($_POST['new-category']) && isset($_POST['tags']) && isset($_POST['new-title']) && isset($_POST['post-message'])&& isset($_POST['start-date']))
+        if(isset($_SESSION['user_id']) && isset($_POST['new-category']) && isset($_POST['tags']) && isset($_POST['new-title']) && isset($_POST['post-message']) && isset($_POST['start-date'])&& isset($_POST['start-time']))
         {
             $user_id = $_SESSION['user_id'];
             $new_category = $_POST['new-category'];
@@ -26,7 +26,7 @@ class controlpanel extends controller
             $new_post_message = $_POST['post-message'];
             $tags = $_POST['tags'];
             $start_date = $_POST['start-date'];
-
+            $start_time = $_POST['start-time'];
 
             $post = new post();
             $post->user_id = intval($user_id);
@@ -35,6 +35,7 @@ class controlpanel extends controller
             $post->title = $new_title;
             $post->content = $new_post_message;
             $post->publish_date = $start_date;
+            $post->start_time = $start_time;
             $post->is_public = true;
 
             $this->model->insertPost($post);
