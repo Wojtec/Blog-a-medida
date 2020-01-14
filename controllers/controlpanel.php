@@ -92,5 +92,11 @@ class controlpanel extends controller
         loadModel("category")->removeCategory($categoryId);
         $this->redirectToControlPanel();
     }
+
+    function createCategoryAction()
+    {
+        loadModel("category")->createCategory($_POST["categoryName"]);
+        $this->redirectToControlPanel();
+    }
 }
 ?>

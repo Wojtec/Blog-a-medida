@@ -62,6 +62,21 @@ class categorymodel extends model
             echo "sql error " . $e.getMessage();
         }
     }
+
+    public function createCategory($categoryName)
+    {
+        try
+        {
+            $qstr = 'insert into categories (category_name) values ("' . $categoryName . '")';
+            $query = $this->db->connect()->prepare($qstr);
+
+            $query->execute();
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+        }
+    }
 }
 
 ?>

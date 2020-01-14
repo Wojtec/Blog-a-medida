@@ -23,7 +23,17 @@
                 </form>
             ';
         }
+
+        echo '
+            <form action="' . constant("URL") . 'controlpanel/createCategory" method="post">
+                <input type="text" name="categoryName" value="New">
+                <input type="submit" value="Create">
+            </form>
+        ';
+
     ?>
+
+    
 
     <hr>
 
