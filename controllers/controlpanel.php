@@ -1,4 +1,6 @@
 <?php
+require_once 'models/entities/post.php';
+
 class controlpanel extends controller
 {
     function __construct()
@@ -7,39 +9,32 @@ class controlpanel extends controller
         session_start();
     }
 
-    function newPostAction() // Finish this
+    function createPostAction()
     {
-        session_start();
-        
-        if(
-            isset($_SESSION['user_id']) && 
-            isset($_POST['new-category']) && 
-            isset($_POST['tags']) && 
-            isset($_POST['new-title']) && 
-            isset($_POST['post-message']) && 
-            isset($_POST['start-date']) && 
-            isset($_POST['start-time']))
+        $categories = loadModel("category")->getCategories();
+        $requestedCategoryName = $_POST['category'];
+
+        $categoryId = null;
+
+        foreach ($categories as $category)
         {
-            $user_id = $_SESSION['user_id'];
-            $new_category = $_POST['new-category'];
-            $new_title = $_POST['new-title'];
-            $new_post_message = $_POST['post-message'];
-            $tags = $_POST['tags'];
-            $start_date = $_POST['start-date'];
-            $start_time = $_POST['start-time'];
-
-            $post = new post();
-            $post->user_id = intval($user_id);
-            $post->new_category = $new_category;
-            $post->tags = $tags;
-            $post->title = $new_title;
-            $post->content = $new_post_message;
-            $post->publish_date = date_add($start_date, $start_time);
-            $post->start_time = $start_time;
-            $post->is_public = true;
-
-            $this->model->insertPost($post);
+            if (strcmp($category->category_name, $requestedCategoryName) == 0)
+            {
+                $categoryId = $category->category_id;
+            }
         }
+
+        $post = new post();
+        $post->user_id = $_SESSION['user_id'];
+        $post->category_id =  $categoryId;
+        $post->tags = $_POST['tags'];
+        $post->title = $_POST['title'];
+        $post->content = $_POST['content'];
+        $post->publish_date = new DateTime($_POST['datetime']);
+        $post->is_public = true;
+
+        loadModel("post")->insertPost($post);   
+        $this->redirectToControlPanel();
     }
 
     function render()
@@ -68,7 +63,6 @@ class controlpanel extends controller
 
     private function loadUserNameIntoView()
     {
-
         $this->view->user = loadModel('user')->getUserByUserId($_SESSION['user_id']);
     }
 
@@ -94,6 +88,12 @@ class controlpanel extends controller
     function removeCategoryAction($categoryId)
     {
         loadModel("category")->removeCategory($categoryId);
+        $this->redirectToControlPanel();
+    }
+
+    function createCategoryAction()
+    {
+        loadModel("category")->createCategory($_POST["categoryName"]);
         $this->redirectToControlPanel();
     }
 }

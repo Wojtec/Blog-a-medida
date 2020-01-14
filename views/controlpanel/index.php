@@ -23,7 +23,17 @@
                 </form>
             ';
         }
+
+        echo '
+            <form action="' . constant("URL") . 'controlpanel/createCategory" method="post">
+                <input type="text" name="categoryName" value="New">
+                <input type="submit" value="Create">
+            </form>
+        ';
+
     ?>
+
+    
 
     <hr>
 
@@ -39,18 +49,24 @@
         }
     ?>
    
-    <form action="<?php echo constant('URL'); ?>controlpanel/newPost" method="post">
-             <label for="start-date">Start date:</label>
-            <input type="date" id="start-date" name="start-date">
-            <input type="time" id="start-time" name="start-time">
-            <label for="new-catgory">Category</label>
-            <input type="text" name="new-category">
-            <label for="new-catgory">Tags</label>
+    <form action="<?php echo constant('URL'); ?>controlpanel/createPost" method="post">
+            <p>Publishing date time:</p>
+            <input type="datetime-local" name="datetime">
+            <p>Category</p>
+            <select name="category">
+                <?php
+                    foreach ($this->categories as $category)
+                    {
+                        echo '<option>' . $category->category_name . '</option>';
+                    }
+                ?>
+            </select>
+            <p>Tags</p>
             <input type="text" name="tags">
-            <label for="new-title">Title</label>
-            <input type="text" name="new-title">
-            <textarea name="post-message" rows="10" cols="100">Text area.</textarea>    
-            <input type="submit" name="subit-new-post">
+            <p>Title</p>
+            <input type="text" name="title">
+            <textarea name="content" rows="10" cols="100">Text area.</textarea>    
+            <input type="submit">
     </form>
     <?php require 'views/footer.php'; ?>
 </body>
