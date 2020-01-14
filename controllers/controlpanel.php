@@ -27,8 +27,6 @@ class controlpanel extends controller
             $start_date = $_POST['start-date'];
             $start_time = $_POST['start-time'];
 
-
-
             $post = new post();
             $post->user_id = intval($user_id);
             $post->new_category = $new_category;
@@ -55,7 +53,22 @@ class controlpanel extends controller
             header("Location: " . constant("URL") . "login");
         }
 
+        $categories = $this->model->getCategories();
+        $this->view->categories = $categories;
         $this->view->render('controlpanel/index');
+    }
+
+    function editCategory($categoryId)
+    {
+        $categoryName = $_POST["categoryName"];
+        $this->model->editCategory($categoryId, $categoryName);
+        $this->render();
+    }
+
+    function removeCategory($categoryId)
+    {
+        $this->model->removeCategory($categoryId);
+        $this->render();
     }
 }
 ?>

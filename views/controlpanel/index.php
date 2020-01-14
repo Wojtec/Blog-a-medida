@@ -9,6 +9,23 @@
 </head>
 <body>
     <?php require 'views/header.php'; ?>
+
+    <p>Categories</p>
+
+    <?php
+        foreach($this->categories as $category)
+        {
+            echo '
+                <form action="' . constant("URL") . 'controlpanel/editCategory/' . $category->category_id . '" method="post">
+                    <input type="text" name="categoryName" value="' . $category->category_name . '">
+                    <input type="submit" value="Edit">
+                    <p><a href="' . constant("URL") . 'controlpanel/removeCategory/' . $category->category_id . '">Remove</a></p>
+                </form>
+            ';
+        }
+    ?>
+
+    <hr>
    
     <form action="<?php echo constant('URL'); ?>controlpanel/newPost" method="post">
              <label for="start-date">Start date:</label>
