@@ -9,6 +9,7 @@ class post
     public $title;
     public $content;
     public $is_public;
+    public $tags;
 }
 
 ?>
