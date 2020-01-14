@@ -54,7 +54,14 @@
             <input type="date" id="start-date" name="start-date">
             <input type="time" id="start-time" name="start-time">
             <label for="new-catgory">Category</label>
-            <input type="text" name="new-category">
+            <select name="">
+                <?php
+                    foreach ($this->categories as $category)
+                    {
+                        echo '<option>' . $category->category_name . '</option>';
+                    }
+                ?>
+            </select>
             <label for="new-catgory">Tags</label>
             <input type="text" name="tags">
             <label for="new-title">Title</label>
