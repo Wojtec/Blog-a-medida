@@ -41,7 +41,25 @@ class controlpanelModel extends model
 
     public function insertPost($post){
 
-        var_dump($post);
+        try
+        {
+            $query = $this->db->connect()->prepare('insert into posts (user_id, title, content, is_public, tags, publish_date) values (:user_id, :title, :content, :is_public,:tags, :publish_date)');
+
+            $query->execute([
+                'user_id' => $post->user_id,
+                'title' => $post->title,
+                'content' => $post->content,
+                'is_public' => $post->is_public,
+                'tags' => $post->tags,
+                'publish_date' => $post->publish_date
+            ]);
+
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
 
 
     }

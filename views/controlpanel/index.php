@@ -13,6 +13,8 @@
     <form action="<?php echo constant('URL'); ?>controlpanel" method="post">
             <label for="new-catgory">Category</label>
             <input type="text" name="new-category">
+            <label for="new-catgory">Tags</label>
+            <input type="text" name="tags">
             <label for="new-title">Title</label>
             <input type="text" name="new-title">
             <textarea name="post-message" rows="10" cols="100">Text area.</textarea>    
