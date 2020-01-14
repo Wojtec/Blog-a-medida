@@ -1,0 +1,12 @@
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: rgb(0, 127, 201);
+}
+
+body {
+    background-color: rgb(124, 173, 196);
+    font-family: 'Quicksand', sans-serif;
+}
