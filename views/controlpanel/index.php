@@ -10,7 +10,7 @@
 <body>
     <?php require 'views/header.php'; ?>
    
-    <form action="<?php echo constant('URL'); ?>controlpanel" method="post">
+    <form action="<?php echo constant('URL'); ?>controlpanel/newPost" method="post">
              <label for="start-date">Start date:</label>
             <input type="date" id="start-date" name="start-date">
             <input type="time" id="start-time" name="start-time">
