@@ -1,6 +1,6 @@
 <?php
 
-define('URL', 'http://localhost/Blog-a-medida/');
+define('URL', 'http://localhost/');
 
 //Axel laptop configuration
 define('HOST', 'localhost');

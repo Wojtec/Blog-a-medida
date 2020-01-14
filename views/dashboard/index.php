@@ -40,7 +40,7 @@
                         
                         foreach($post->comments as $comment) 
                         {
-                            
+                            var_dump($comment);
                         }
 
                         echo '

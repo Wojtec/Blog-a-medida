@@ -36,7 +36,7 @@ create table comments (
     user_id			int,
     post_id			int				not null,
     comment_text	varchar(200)	not null,
-    comment_date	datetime		default now(),
+    comment_date	datetime		not null,   default now(),
     primary key (comment_id),
     foreign key (user_id) references users(user_id) on delete cascade,
     foreign key (post_id) references posts(post_id) on delete cascade

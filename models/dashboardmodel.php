@@ -18,13 +18,12 @@ class dashboardModel extends model
         {
 
             
-            $query = $this->db->connect()->prepare('insert into comments (user_id, post_id, comment_text, comment_date) values (:user_id, :post_id, :comment_text, :comment_date)');
+            $query = $this->db->connect()->prepare('insert into comments (user_id, post_id, comment_text) values (:user_id, :post_id, :comment_text)');
             
             $query->execute([
                 'post_id' => intval($postId),
                 'user_id' => isset($userId) ? intval($userId) : null,
-                'comment_text' => $commentText,
-                'comment_date' => date("Y-m-d H:i:s")
+                'comment_text' => $commentText
             ]);
         }
         catch(PDOException $e)
