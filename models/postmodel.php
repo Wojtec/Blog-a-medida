@@ -76,7 +76,7 @@ class postmodel extends model
     }
     
     public function getUserPosts($userId){
-        $postsArray = [];
+        $posts = [];
         try
         {
             $query = $this->db->connect()->query('
@@ -85,15 +85,18 @@ class postmodel extends model
             ');
             if(!$query) return null;
         while ($row = $query->fetch()){
-            $posts = new post();
-            $posts->user_id = $row['user_id'];
-            $posts->category_id = $row['category_id'];
-            $posts->publish_date = $row['publish_date'];
-            $posts->title = $row['title'];
-            $posts->content = $row['content'];
-            array_push($postsArray,$posts);
+            $post = new post();
+            $post->post_id = $row['post_id'];
+            $post->user_id    = $row['user_id'];
+            $post->category_id  = $row['category_id'];
+            $post->publish_date  = $row['publish_date'];
+            $post->title  = $row['title'];
+            $post->content  = $row['content'];
+            $post->is_public  = $row['is_public'];
+            $post->tags  = $row['tags'];
+            array_push($posts, $post);
         }
-            return $postsArray;
+            return $posts;
         }
         catch(PDOException $e)
         {
