@@ -10,11 +10,11 @@ class postmodel extends model
         parent::__construct();
     }
 
-    public function getPostsFilteredByCategoryName($catFilter){
+    public function getPostsFilteredByCategoryId($category_id){
         $filterPost = [];
         try
         {
-            $query = $this->db->connect()->query('select * from posts where posts.category_id = ' . $catFilter.'');
+            $query = $this->db->connect()->query('select * from posts where posts.category_id = ' . $category_id.'');
             if(!$query) return null;
 
             while($row = $query->fetch()){
@@ -80,8 +80,6 @@ class postmodel extends model
     {
         try
         {
-
-            
             $query = $this->db->connect()->prepare('insert into comments (user_id, post_id, comment_text) values (:user_id, :post_id, :comment_text)');
             
             $query->execute([
@@ -184,16 +182,21 @@ class postmodel extends model
                 array_push($posts, $post);
             }
             
+            $commentModel = loadModel('comment');
+            $userModel = loadModel('user');
+            $categoryModel = loadModel('category');
+            
             foreach ($posts as $post)
             {
-                $post->comments = loadModel("comment")->getCommentsFromPostId($post->post_id);
-                $post->user = loadModel("user")->getUserByUserId($post->user_id);
+                $post->comments = $commentModel->getCommentsFromPostId($post->post_id);
+                $post->user = $userModel->getUserByUserId($post->user_id);
+                $post->category = $categoryModel->getCategoryById($post->category_id);
 
                 foreach ($post->comments as $comment)
                 {
                     if ($comment->user_id != null)
                     {
-                        $comment->user = loadModel("user")->getUserByUserId($comment->user_id);
+                        $comment->user = $userModel->getUserByUserId($comment->user_id);
                     }
                 }
             }

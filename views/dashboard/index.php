@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="public/styles/reset.css">
-    <link rel="stylesheet" href="public/styles/base-style.css">
-    <link rel="stylesheet" href="public/styles/layout.css">
+    <link rel="stylesheet" href="<?php echo constant("URL"); ?>public/styles/reset.css">
+    <link rel="stylesheet" href="<?php echo constant("URL"); ?>public/styles/base-style.css">
+    <link rel="stylesheet" href="<?php echo constant("URL"); ?>public/styles/layout.css">
     <title>Blog</title>
 </head>
 <body class="back-color">

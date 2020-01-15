@@ -1,6 +1,7 @@
 <?php
 class dashboard extends controller
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -59,12 +60,12 @@ class dashboard extends controller
 
     public function searchAction()
     {
-        // TODO: Handle invalid searches
         $target = $_GET["target"];
 
-        $this->view->posts = loadModel("post")->getPostsByContent($target);
         $this->loadUserNameIntoViewIfLoggedIn();
+        $this->view->posts = loadModel("post")->getPostsByContent($target);
         $this->loadCategoriesIntoView();
+        
         $this->view->render('dashboard/index');
     }
 

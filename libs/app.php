@@ -1,5 +1,4 @@
 <?php
-require_once "controllers/failure.php";
 
 function loadModel($model)
 {
@@ -23,34 +22,23 @@ class app
         $url = rtrim($url, '/');
         $url = explode('/', $url);
 
-        $controllerName = $url[0];
-        $controllerPath = 'controllers/' . $controllerName . '.php';
+        require_once 'controllers/' . $url[0] . '.php';
+        $controller = new $url[0];
 
-        if (file_exists($controllerPath))
+        if (isset($url[1]))
         {
-            require_once $controllerPath;
-            $controller = new $controllerName;
-
-            if (isset($url[1]))
+            if (isset($url[2]))
             {
-                if (isset($url[2]))
-                {
-                    $controller->{ $url[1] . 'Action' }( $url[2] );
-                }
-                else
-                {
-                    $controller->{ $url[1] . 'Action' }();
-                }
+                $controller->{ $url[1] . 'Action' }( $url[2] );
             }
             else
             {
-                $controller->render();
+                $controller->{ $url[1] . 'Action' }();
             }
         }
         else
         {
-            $errorMsg = "Could not find a controller named " . $controllerName;
-            $controller = new failure($errorMsg);
+            $controller->render();
         }
 
     }
