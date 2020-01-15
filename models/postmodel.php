@@ -75,7 +75,7 @@ class postmodel extends model
         }
     }
     
-    public function getUserPosts($userId){
+    public function getPostsByUserId($userId){
         $posts = [];
         try
         {

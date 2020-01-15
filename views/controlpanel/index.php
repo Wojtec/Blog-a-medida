@@ -37,14 +37,52 @@
     </div>
 
     <hr>
+    
+    <?php   
 
-    <?php
-        foreach($this->userPosts as $userPost)
+        foreach($this->posts as $post)
         {
-            var_dump($userPost);
+            echo '
+                <div class="editor-box front-color">
+                    <form action="' . constant("URL") . 'controlpanel/editPost/' . $post->post_id . '" method=post>
+                        <div class="editor-row">
+                            <p>Title</p>
+                            <input type="text" value="' . $post->title . '"></input>
+                        </div>
+                        
+                        <div class="editor-row">
+                            <p>Published</p>
+                            <select>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="editor-row">
+                            <p>Date and time</p>
+                            <input type="datetime-local" value="' . date('Y-m-d\TH:i', strtotime($post->publish_date)) . '"></input>
+                        </div>
+                        
+                        <div class="editor-row">
+                            <p>Tags</p>
+                            <input type="text" value="' . $post->tags . '"></input>
+                        </div>
+
+                        <div class="editor-row">
+                            <textarea>' . $post->content . '</textarea>
+                        </div>
+
+                        <div class="editor-row">
+                            <button type="submit">Modify</textarea>
+                        </div>
+                    </form>
+                </div>
+            ';
         }
     ?>
-   
+    
+    <hr>
+    
     <form action="<?php echo constant('URL'); ?>controlpanel/createPost" method="post">
             <p>Publishing date time:</p>
             <input type="datetime-local" name="datetime">

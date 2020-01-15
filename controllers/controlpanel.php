@@ -48,7 +48,7 @@ class controlpanel extends controller
 
     private function loadUserPosts()
     {
-        $this->view->userPosts = loadModel("post")->getUserPosts($_SESSION['user_id']);
+        $this->view->posts = loadModel("post")->getPostsByUserId($_SESSION['user_id']);
     }
 
     private function loadCategoriesIntoView()
