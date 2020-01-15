@@ -92,5 +92,16 @@ class dashboard extends controller
         
         $this->reloadPage();
     }
+
+    public function filterPostsAction()
+    {
+        $category_id = $_GET["category_id"];
+
+        $this->loadUserNameIntoViewIfLoggedIn();
+        $this->view->posts = loadModel("post")->getPostsByCategoryId($category_id);
+        $this->loadCategoriesIntoView();
+        
+        $this->view->render('dashboard/index');
+    }
 }
 ?>

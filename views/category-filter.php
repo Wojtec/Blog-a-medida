@@ -1,8 +1,7 @@
-
-   <?php
+<?php
    echo '
-   <form action="' . constant("URL") . 'dashboard" " method="post">
-   <select name="catFilter">';
+   <form action="' . constant("URL") . 'dashboard/filterPosts" " method="get">
+   <select name="category_id">';
 
         foreach($this->categories as $category){
             echo '

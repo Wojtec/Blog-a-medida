@@ -10,21 +10,47 @@ class postmodel extends model
         parent::__construct();
     }
 
-    public function getPostsFilteredByCategoryId($category_id){
-        $filterPost = [];
+    public function getPostsByCategoryId($category_id){
+        $posts = [];
+        
         try
         {
-            $query = $this->db->connect()->query('select * from posts where posts.category_id = ' . $category_id.'');
-            if(!$query) return null;
-
+            $query = $this->db->connect()->query('select * from posts where posts.category_id = ' . $category_id.' and publish_date < now() and is_public = true order by publish_date;');
+            if (!$query) return [];
+            
             while($row = $query->fetch()){
-                $filPost = new post();
-                $filPost->category_id = $row['category_id'];
-                $filPost->publish_date = $row['publish_date'];
-                $filPost->title = $row['title'];
-                $filPost->content = $row['content'];
-                array_push($filterPost,$filPost);
+                $post = new post();
+                $post->post_id = $row['post_id'];
+                $post->user_id    = $row['user_id'];
+                $post->category_id  = $row['category_id'];
+                $post->publish_date  = $row['publish_date'];
+                $post->title  = $row['title'];
+                $post->content  = $row['content'];
+                $post->is_public  = $row['is_public'];
+                $post->tags  = $row['tags'];
+                array_push($posts, $post);
             }
+            
+            $commentModel = loadModel('comment');
+            $userModel = loadModel('user');
+            $categoryModel = loadModel('category');
+
+            foreach ($posts as $post)
+            {
+                $post->comments = $commentModel->getCommentsFromPostId($post->post_id);
+                $post->user = $userModel->getUserByUserId($post->user_id);
+                $post->category = $categoryModel->getCategoryById($post->category_id);
+
+                foreach ($post->comments as $comment)
+                {
+                    if ($comment->user_id != null)
+                    {
+                        $comment->user = $userModel->getUserByUserId($comment->user_id);
+                    }
+                }
+            }
+
+            return $posts;
         }
         catch(PDOException $e)
         {
