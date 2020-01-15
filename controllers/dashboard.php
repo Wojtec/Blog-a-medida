@@ -14,6 +14,7 @@ class dashboard extends controller
         
         $this->view->render('dashboard/index');
     }
+
     private function loadCategoriesIntoView()
     {
         $this->view->categories = loadModel("category")->getCategories();
@@ -35,6 +36,11 @@ class dashboard extends controller
         $this->view->posts = loadModel('post')->getPublishedPosts();
     }
 
+    private function reloadPage()
+    {
+        header("Location: " . constant("URL") . "dashboard");
+    }
+
     public function commentAction($post_id)
     {
         session_start();
@@ -48,7 +54,7 @@ class dashboard extends controller
         
         loadModel('post')->commentPostByPostId($post_id, $userId, $_POST["comment-text"]);
         
-        header("Location: " . constant("URL") . "dashboard");
+        $this->reloadPage();
     }
 
     public function searchAction()
@@ -57,7 +63,33 @@ class dashboard extends controller
         $target = $_GET["target"];
 
         $this->view->posts = loadModel("post")->getPostsByContent($target);
+        $this->loadUserNameIntoViewIfLoggedIn();
+        $this->loadCategoriesIntoView();
         $this->view->render('dashboard/index');
+    }
+
+    public function deleteAction($comment_id)
+    {
+        session_start();
+
+        if (!isset($_SESSION["user_id"]))
+        {
+            $this->reloadPage();
+        }
+
+        $comment_model = loadModel("comment");
+
+        $comment = $comment_model->getCommentById($comment_id);
+        $user = loadModel("user")->getUserByUserId($comment->user_id);
+
+        if ($user->user_id != $_SESSION["user_id"])
+        {
+            $this->reloadPage();
+        }
+
+        $comment_model->deleteCommentById($comment_id);
+        
+        $this->reloadPage();
     }
 }
 ?>
