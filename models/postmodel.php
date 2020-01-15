@@ -10,6 +10,20 @@ class postmodel extends model
         parent::__construct();
     }
 
+    public function removePostById($post_id)
+    {
+        try
+        {
+            $query = $this->db->connect()->prepare('delete from posts where post_id = ' . intval($post_id) . '');
+
+            $query->execute();
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+        }
+    }
+
     public function modifyPost($post_id, $post)
     {
         try

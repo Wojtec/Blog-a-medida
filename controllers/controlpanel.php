@@ -114,5 +114,12 @@ class controlpanel extends controller
         loadModel("post")->modifyPost($originalPost->post_id, $newPost);   
         $this->redirectToControlPanel();
     }
+
+    function deletePostAction($post_id)
+    {
+        
+        loadModel("post")->removePostById($post_id);
+        $this->redirectToControlPanel();
+    }
 }
 ?>

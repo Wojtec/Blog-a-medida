@@ -65,8 +65,8 @@
                         <div class="editor-row">
                             <p>Published</p>
                             <select name="published">
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>
+                                <option value="true" ' . ($post->is_public ? 'selected' : '') . '>Yes</option>
+                                <option value="false" ' . ($post->is_public ? '' : 'selected') . '>No</option>
                             </select>
                         </div>
                         
@@ -85,8 +85,10 @@
                         </div>
 
                         <div class="editor-row">
-                            <button type="submit">Modify</textarea>
+                            <button type="submit">Modify</button>
+                            <a href="' . constant("URL") . 'controlpanel/deletePost/' . $post->post_id . '"><p>Delete</p></a>
                         </div>
+
                     </form>
                 </div>
             ';
@@ -95,6 +97,7 @@
     
     <hr>
     
+    <p>TODO: Style this! This is where you create posts. It is functional.</p>
     <form action="<?php echo constant('URL'); ?>controlpanel/createPost" method="post">
             <p>Publishing date time:</p>
             <input type="datetime-local" name="datetime">
