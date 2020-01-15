@@ -17,6 +17,18 @@
     color: rgb(231, 246, 255);
 }
 
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: rgb(0, 127, 201);
+}
+
 .footer {
     height: 50px;
 }
@@ -96,4 +108,24 @@ hr {
 button {
     height: 30px;
     width: 100px;
+}
+
+.category-box {
+    box-shadow: 0px 0px 10px 0px rgb(65, 65, 65);
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 300px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.section-title {
+    font-size: 18pt;
+    margin-bottom: 20px;
+}
+
+.category {
+    display: flex;
 }

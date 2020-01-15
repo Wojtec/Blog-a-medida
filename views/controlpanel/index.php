@@ -10,33 +10,31 @@
     <link rel="stylesheet" href="<?php echo constant("URL"); ?>public/styles/layout.css">
     <title>Blog</title>
 </head>
-<body>
+<body class="back-color">
     <?php require 'views/header.php'; ?>
 
-    <p>Categories</p>
 
-    <?php
-        foreach($this->categories as $category)
-        {
+    <div class="category-box front-color">
+        <p class="section-title">Category management</p>
+        <?php
+            foreach($this->categories as $category)
+            {
+                echo '
+                    <form class="category" action="' . constant("URL") . 'controlpanel/editCategory/' . $category->category_id . '" method="post">
+                        <input type="text" name="categoryName" value="' . $category->category_name . '">
+                        <input type="submit" value="Edit">
+                        <p><a href="' . constant("URL") . 'controlpanel/removeCategory/' . $category->category_id . '">Remove</a></p>
+                    </form>
+                ';
+            }
             echo '
-                <form action="' . constant("URL") . 'controlpanel/editCategory/' . $category->category_id . '" method="post">
-                    <input type="text" name="categoryName" value="' . $category->category_name . '">
-                    <input type="submit" value="Edit">
-                    <p><a href="' . constant("URL") . 'controlpanel/removeCategory/' . $category->category_id . '">Remove</a></p>
+                <form class="category" action="' . constant("URL") . 'controlpanel/createCategory" method="post">
+                    <input type="text" name="categoryName" placeholder="write a new category here">
+                    <input type="submit" value="Create">
                 </form>
             ';
-        }
-
-        echo '
-            <form action="' . constant("URL") . 'controlpanel/createCategory" method="post">
-                <input type="text" name="categoryName" value="New">
-                <input type="submit" value="Create">
-            </form>
-        ';
-
-    ?>
-
-    
+        ?>
+    </div>
 
     <hr>
 
@@ -44,11 +42,6 @@
         foreach($this->userPosts as $userPost)
         {
             var_dump($userPost);
-            echo '
-            <p> "'. $userPost->title .'"</p>
-            <p> "'. $userPost->content .'"</p>
-            <p> "'. $userPost->tags .'"</p>
-            ';
         }
     ?>
    
