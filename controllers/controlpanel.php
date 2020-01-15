@@ -91,5 +91,28 @@ class controlpanel extends controller
         loadModel("category")->createCategory($_POST["categoryName"]);
         $this->redirectToControlPanel();
     }
+
+    function editPostAction($postId)
+    {
+        $originalPost = loadModel("post")->getPostById($postId);
+
+        if ($originalPost->user_id != $_SESSION['user_id'])
+        {
+            $this->redirectToControlPanel();
+        }
+
+        $newPost = new post();
+        $newPost->post_id = $originalPost->post_id;
+        $newPost->user_id = $_SESSION['user_id'];
+        $newPost->category_id = $_POST["category_id"];
+        $newPost->publish_date = new DateTime($_POST['datetime']);
+        $newPost->title = $_POST["title"];
+        $newPost->content = $_POST["content"];
+        $newPost->is_public = $_POST["published"];
+        $newPost->tags = $_POST["tags"];
+        
+        loadModel("post")->modifyPost($originalPost->post_id, $newPost);   
+        $this->redirectToControlPanel();
+    }
 }
 ?>

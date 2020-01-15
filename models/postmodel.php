@@ -10,6 +10,43 @@ class postmodel extends model
         parent::__construct();
     }
 
+    public function modifyPost($post_id, $post)
+    {
+        try
+        {
+            $string = '
+            update posts 
+                set 
+                    user_id = ' .           $post->user_id . ', 
+                    category_id = ' .       $post->category_id . ', 
+                    title = "' .             $post->title . '", 
+                    content = "' .           $post->content . '", 
+                    is_public = ' .         $post->is_public . ', 
+                    tags = "' .              $post->tags . '", 
+                    publish_date = "' .      $post->publish_date->format('Y-m-d H:i:s') . '"
+                        where post_id = ' . $post_id . ';';
+
+            $query = $this->db->connect()->prepare('
+                update posts 
+                    set 
+                        user_id = ' .           $post->user_id . ', 
+                        category_id = ' .       $post->category_id . ', 
+                        title = "' .             $post->title . '", 
+                        content = "' .           $post->content . '", 
+                        is_public = ' .         $post->is_public . ', 
+                        tags = "' .              $post->tags . '", 
+                        publish_date = "' .      $post->publish_date->format('Y-m-d H:i:s') . '"
+                            where post_id = ' . $post_id . ';');
+    
+            $query->execute();
+    
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+        }
+    }
+
     public function getPostsByCategoryId($category_id){
         $posts = [];
         
@@ -57,8 +94,33 @@ class postmodel extends model
             echo "sql error " . $e.getMessage();
             return null;
         }
-        var_dump($filterPost);
-        return $filterPost;
+    }
+
+    public function getPostById($post_id)
+    {
+        try
+        {
+            $query = $this->db->connect()->query('select * from posts where post_id = ' . $post_id . ';');
+
+            $row = $query->fetch();
+
+            $post = new post();
+            $post->post_id = $row['post_id'];
+            $post->user_id    = $row['user_id'];
+            $post->category_id  = $row['category_id'];
+            $post->publish_date  = $row['publish_date'];
+            $post->title  = $row['title'];
+            $post->content  = $row['content'];
+            $post->is_public  = $row['is_public'];
+            $post->tags  = $row['tags'];
+
+            return $post;
+        }
+        catch(PDOException $e)
+        {
+            echo "sql error " . $e.getMessage();
+            return null;
+        }
     }
 
     public function insertPost($post){

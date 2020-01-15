@@ -47,12 +47,24 @@
                     <form action="' . constant("URL") . 'controlpanel/editPost/' . $post->post_id . '" method=post>
                         <div class="editor-row">
                             <p>Title</p>
-                            <input type="text" value="' . $post->title . '"></input>
+                            <input type="text" name="title" value="' . $post->title . '"></input>
+                        </div>
+
+                        <div class="editor-row">
+                            <p>Category</p>
+                            <select name="category_id">
+                            ';
+                                foreach ($this->categories as $category)
+                                {
+                                    echo '<option value="' . $category->category_id . '" ' . ($category->category_id == $post->category_id ? "selected" : "") . '>' . $category->category_name . '</option>';
+                                }
+                            echo '
+                            </select>
                         </div>
                         
                         <div class="editor-row">
                             <p>Published</p>
-                            <select>
+                            <select name="published">
                                 <option value="true">Yes</option>
                                 <option value="false">No</option>
                             </select>
@@ -60,16 +72,16 @@
                         
                         <div class="editor-row">
                             <p>Date and time</p>
-                            <input type="datetime-local" value="' . date('Y-m-d\TH:i', strtotime($post->publish_date)) . '"></input>
+                            <input type="datetime-local" name="datetime" value="' . date('Y-m-d\TH:i', strtotime($post->publish_date)) . '"></input>
                         </div>
                         
                         <div class="editor-row">
                             <p>Tags</p>
-                            <input type="text" value="' . $post->tags . '"></input>
+                            <input type="text" name="tags" value="' . $post->tags . '"></input>
                         </div>
 
                         <div class="editor-row">
-                            <textarea>' . $post->content . '</textarea>
+                            <textarea name="content">' . $post->content . '</textarea>
                         </div>
 
                         <div class="editor-row">
