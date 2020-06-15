@@ -1,0 +1,152 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    padding: 10px;
+}
+
+.title {
+    font-size: 35pt;
+}
+
+.header a:visited {
+    color: black;
+}
+
+.header a:hover {
+    color: rgb(231, 246, 255);
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: rgb(0, 127, 201);
+}
+
+.footer {
+    height: 50px;
+}
+
+.vertical-centered-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.post-box {
+    box-shadow: 0px 0px 10px 0px rgb(65, 65, 65);
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 700px;
+    min-height: 200px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.post-date {
+    margin-top: 5px;
+    font-size: 10pt;
+}
+
+.post-title {
+    font-size: 22pt;
+}
+
+.post-content {
+    margin: 20px;
+}
+
+.comment-box {
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgb(65, 65, 65);
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 700px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.comment-author {
+    font-size: 16pt;
+}
+
+.comment-text {
+    margin: 20px;
+}
+
+.comment-date {
+    font-size: 10pt;
+}
+
+hr {
+    margin: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.274);
+}
+
+.comment-input-container {
+    display: flex;
+    justify-content: space-around;
+    
+    margin: 0 20px;
+    margin-top: 10px;
+}
+
+.comment-input {
+    width: 500px;
+}
+
+button {
+    height: 30px;
+    width: 100px;
+}
+
+.category-box {
+    box-shadow: 0px 0px 10px 0px rgb(65, 65, 65);
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 300px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.section-title {
+    font-size: 18pt;
+    margin-bottom: 20px;
+}
+
+.category {
+    display: flex;
+}
+
+.editor-box {
+    box-shadow: 0px 0px 10px 0px rgb(65, 65, 65);
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 500px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.editor-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+textarea {
+    height: 100px;
+    width: 500px;
+}

@@ -1,0 +1,52 @@
+
+/**
+body {
+    background-image: url("../img/mountains.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}**/
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: rgb(0, 127, 201);
+}
+
+form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px 0px rgb(65, 65, 65);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.link-text {
+    font-size: 10pt;
+}
+
+form input {
+    margin: 10px;
+    font-size: 16pt;
+    height: 50px;
+    width: 80%;
+}
+
+form button {
+    margin: 20px;
+    font-size: 16pt;
+    height: 50px;
+    width: 200px;
+}
+

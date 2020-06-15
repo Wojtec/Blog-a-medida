@@ -1,0 +1,13 @@
+
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.back-color {
+    background-color: rgb(124, 173, 196);
+}
+
+.front-color {
+    background-color: rgba(245, 245, 245, 0.856);
+}
